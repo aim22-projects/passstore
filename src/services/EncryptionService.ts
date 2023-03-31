@@ -2,10 +2,15 @@ import { AES, enc as Encoding } from 'crypto-js';
 
 const key = "";
 
-const encrypt = (value: string) => AES.encrypt(value, key).toString();
+interface IEncryptionService {
+    encrypt: (value: string) => string;
+    decrypt: (value: string) => string;
+};
 
-const decrypt = (value: string) => AES.decrypt(value, key).toString(Encoding.Utf8);
+const encrypt = (value: string): string => AES.encrypt(value, key).toString();
 
-const EncryptionService = { encrypt, decrypt };
+const decrypt = (value: string): string => AES.decrypt(value, key).toString(Encoding.Utf8);
+
+const EncryptionService: IEncryptionService = { encrypt, decrypt };
 
 export default EncryptionService;
